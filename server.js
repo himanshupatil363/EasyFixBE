@@ -11,7 +11,8 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 console.log("Starting server");
 app.listen(PORT, () => console.log(`server started on ${PORT}`));
-
+//setup routes
+app.use("/posts", require("./routes/userroutes"));
 //setup mongoose
 console.log("connecting MongoDB");
 mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
