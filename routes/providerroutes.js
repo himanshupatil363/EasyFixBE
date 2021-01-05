@@ -32,6 +32,5 @@ router.post("/category", async (req, res) => {
     {
        console.error(err);
     }
-    
     });
 module.exports = router;
