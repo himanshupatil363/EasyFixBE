@@ -17,4 +17,4 @@ catch(err)
 }
 
 });
-module.exports = router;
+module.exports = route;
