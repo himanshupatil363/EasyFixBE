@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 console.log("Starting server");
 app.listen(PORT, () => console.log(`server started on ${PORT}`));
 //setup routes
-app.use("/posts", require("./routes/userroutes"));
+app.use("/user", require("./routes/userroutes"));
 app.use("/provider", require("./routes/providerroutes"));
 app.use("/admin", require("./routes/adminroutes"));
 //setup mongoose

@@ -1,20 +1,19 @@
 const router = require("express").Router();
-const Post = require("../models/user"); 
+const user = require("../models/user"); 
 
-router.post("/", async (req, res) => {
-const { name, emailid, pwd, photo, city} = req.body;
+router.post("/register", async (req, res) => {
+const { name, emailid, pwd, city } = req.body;
 
-const newPost = new Post({
-    name, emailid, pwd, photo, city
+const newUser = new user({
+    name, emailid, pwd ,city
 });
 try{
-    const savePost = await newPost.save();
-    console.log(savePost)
+    const saveUser = await newUser.save();
+    console.log(saveUser)
 }
 catch(err)
 {
    console.error(err);
 }
-
 });
 module.exports = router;
