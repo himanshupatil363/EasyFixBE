@@ -16,4 +16,17 @@ catch(err)
    console.error(err);
 }
 });
+
+router.get("/register", async (req, res) => {
+    try{
+        const seeUsers = await user.find();
+        res.json(seeUsers)
+    }
+    catch(err)
+    {
+       res.json({ message :err});
+    }
+    });
+
+
 module.exports = router;
