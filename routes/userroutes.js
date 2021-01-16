@@ -17,7 +17,7 @@ catch(err)
 }
 });
 
-router.get("/register", async (req, res) => {
+router.get("/all", async (req, res) => {
     try{
         const seeUsers = await user.find();
         res.json(seeUsers)

@@ -5,4 +5,4 @@ const category = new mongoose.Schema({
     categoryphoto: { type:String, required:true},
 });
     
-module.exports = post = mongoose.model("categorydata",category);
+module.exports = mongoose.model("category",category);
