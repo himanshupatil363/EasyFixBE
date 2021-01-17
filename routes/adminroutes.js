@@ -99,4 +99,22 @@ router.post("/offer", async (req, res) => {
         console.error(err);
     }
 });
+router.post("/step", async (req, res) => {
+    const {
+        stepdetail,
+        subcategoryid
+        
+    } = req.body;
+
+    const newPost = new offer({
+        subcategoryid,
+        per
+    });
+    try {
+        const savePost = await newPost.save();
+        console.log(savePost)
+    } catch (err) {
+        console.error(err);
+    }
+});
 module.exports = router;
