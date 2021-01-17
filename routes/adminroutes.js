@@ -4,6 +4,8 @@ const Category = require("../models/category");
 const subCategory = require("../models/subcategory");
 const Package = require("../models/package");
 const offer = require("../models/offer");
+const step = require("../models/step");
+const paytoprovider = require("../models/paytoprovider");
 
 router.post("/register", async (req, res) => {
     const {
@@ -106,9 +108,31 @@ router.post("/step", async (req, res) => {
         
     } = req.body;
 
-    const newPost = new offer({
-        subcategoryid,
-        per
+    const newPost = new step({
+        stepdetail,
+        subcategoryid
+    });
+    try {
+        const savePost = await newPost.save();
+        console.log(savePost)
+    } catch (err) {
+        console.error(err);
+    }
+});
+router.post("/paytoprovider", async (req, res) => {
+    const {
+        amount,
+        providerid,
+        pdate,
+        orderid
+        
+    } = req.body;
+
+    const newPost = new paytoprovider({
+        amount,
+        providerid,
+        pdate,
+        orderid
     });
     try {
         const savePost = await newPost.save();
