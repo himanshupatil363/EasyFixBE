@@ -11,11 +11,15 @@ const complain = require("../models/complain");
 
 
 router.post("/register", async (req, res) => {
-const { name, emailid, pwd, city } = req.body;
-
-const newUser = new user({
-    name, emailid, pwd ,city
-});
+    const { name, emailid, pwd, photo, city } = req.body;
+    const newUser = new user({name, emailid, pwd , photo, city});
+    if(!emailid || !pwd){
+        return res.status(400).json({msg : "Not all fields have been altered."});
+    }
+    if(pwd.length<5){
+        return res.status(400).json({msg: "The password should be more than 5 characters"});
+    }
+    
 try{
     const saveUser = await newUser.save();
     console.log(saveUser)
