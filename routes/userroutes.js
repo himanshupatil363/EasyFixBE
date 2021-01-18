@@ -11,24 +11,78 @@ const complain = require("../models/complain");
 
 
 router.post("/register", async (req, res) => {
+    try{
     const { name, emailid, pwd, photo, city } = req.body;
-    const newUser = new user({name, emailid, pwd , photo, city});
+    
     if(!emailid || !pwd){
         return res.status(400).json({msg : "Not all fields have been altered."});
     }
-    if(pwd.length<5){
-        return res.status(400).json({msg: "The password should be more than 5 characters"});
+    if(pwd.length<6){
+        return res.status(400).json({msg: "The password should be more than 6 characters"});
     }
     
-try{
+    const existinguser = await user.findOne({emailid:emailid});
+    if (existinguser)
+        return res.status(400).json({msg : "An account with this email is already exist."});
+
+    if(!name)
+        return res.status(400).json({msg : "Name should not be empty"});
+
+    const salt = await bcrypt.genSalt();
+    const hashedpwd = await bcrypt.hash(pwd,salt);
+
+    console.log(hashedpwd);
+    const newUser = new user({name, emailid, pwd : hashedpwd , photo, city});
     const saveUser = await newUser.save();
-    console.log(saveUser)
+    res.json(saveUser);
+    //console.log(saveUser)
 }
 catch(err)
 {
    console.error(err);
 }
 });
+
+
+router.post("/login", async(req,res) => {
+    try{
+        const { emailid, pwd } = req.body;
+
+        if(!emailid || !pwd)
+        {
+            return res.status(400).json({msg : "Not all fields have been altered."});
+        }
+
+        const User= await user.findOne({ emailid : emailid});
+        if(!User)
+            return res.status(400).json({msg : "No account with this email has been registered."});
+    
+        const isMatch = await bcrypt.compare(pwd, User.pwd);
+        
+        if(!isMatch)
+            return res.status(400).json({msg : "Invalid credentials."});
+
+
+        const token= jwt.sign({id: User._id}, process.env.JWT_SECRET);
+        res.json({
+            token,
+            User: {
+                id:User._id,
+                name:User.name,
+                emailid:User.emailid,
+            }
+
+        });
+
+    }
+    catch(err)
+    {
+        console.error(err);
+    }
+
+});
+
+
 router.post("/payment", async (req, res) => {
     const { orderid,userid,paymentamt,subcategoryid } = req.body;
     
