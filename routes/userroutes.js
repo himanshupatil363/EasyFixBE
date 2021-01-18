@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const user = require("../models/user"); 
 const payment = require("../models/payment");
 const recievedorder = require("../models/recievedorder");
