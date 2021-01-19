@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const auth = require("../middleware/auth");
 const user = require("../models/user"); 
 const payment = require("../models/payment");
 const recievedorder = require("../models/recievedorder");
@@ -80,6 +81,19 @@ router.post("/login", async(req,res) => {
         console.error(err);
     }
 
+});
+
+
+router.delete("/delete" ,auth , async(req, res) => {
+    try{
+       // console.log(req.User);
+        const deletedUser = await user.findByIdAndDelete(req.User);
+        res.json(deletedUser);
+    }
+    catch(err)
+    {
+        console.error(err);
+    }
 });
 
 
