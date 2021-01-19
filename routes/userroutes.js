@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedpwd = await bcrypt.hash(pwd,salt);
 
-    console.log(hashedpwd);
+   // console.log(hashedpwd);
     const newUser = new user({name, emailid, pwd : hashedpwd , photo, city});
     const saveUser = await newUser.save();
     res.json(saveUser);
@@ -86,7 +86,7 @@ router.post("/login", async(req,res) => {
 
 router.delete("/delete" ,auth , async(req, res) => {
     try{
-       // console.log(req.User);
+       //  console.log(req.User);
         const deletedUser = await user.findByIdAndDelete(req.User);
         res.json(deletedUser);
     }
