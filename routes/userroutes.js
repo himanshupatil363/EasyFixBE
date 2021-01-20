@@ -87,7 +87,7 @@ router.post("/login", async(req,res) => {
 router.delete("/delete" ,auth , async(req, res) => {
     try{
        //  console.log(req.User);
-        const deletedUser = await user.findByIdAndDelete(req.User);
+        const deletedUser = await user.findByIdAndDelete(req.userd);
         res.json(deletedUser);
     }
     catch(err)
@@ -96,6 +96,25 @@ router.delete("/delete" ,auth , async(req, res) => {
     }
 });
 
+router.post("/tokenIsValid", async (req,res) => {
+    try{
+        const token=req.header("x-auth-token");
+        if(!token) return res.json(false);
+
+        const verified=jwt.verify(token,process.env.JWT_SECRET);
+        if(!verified) return res.json(false);
+
+
+        const User = await user.findById(verified.id);
+        if(!User) return res.json(false);
+
+        return res.json(true);
+     }
+    catch(err)
+    {
+        console.error(err);
+    }
+});
 
 router.post("/payment", async (req, res) => {
     const { orderid,userid,paymentamt,subcategoryid } = req.body;
