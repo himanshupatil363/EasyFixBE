@@ -17,5 +17,5 @@ app.use("/admin", require("./routes/adminroutes"));
 console.log("connecting MongoDB");
 mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true,}, (err) => {
     if(err) return console.error(err);
-    console.log("MongoDB connection established");
+    console.log("MongoDB connection established...............");
 });
