@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const Providerinsert = require("../models/provider");
+const provider = require("../models/provider"); 
 
 router.post("/register", async (req, res) => {
 const { name, emailid, pwd, photo, city,subcategoryid,specilization,status} = req.body;
 
-const newPost = new Providerinsert({
+const newPost = new provider({
     name, emailid, pwd, photo, city,subcategoryid,specilization,status
 });
 try{
@@ -17,4 +17,14 @@ catch(err)
 }
 
 });
+router.get("/all", async (req, res) => {
+    try{
+        const seeProvider = await provider.find();
+        res.json(seeProvider)
+    }
+    catch(err)
+    {
+       res.json({ message :err});
+    }
+    });
 module.exports = router;
