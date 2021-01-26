@@ -2,10 +2,10 @@ const router = require("express").Router();
 const provider = require("../models/provider"); 
 
 router.post("/register", async (req, res) => {
-const { name, emailid, pwd, photo, city,subcategoryid,specilization,status} = req.body;
+const { name, emailId, pwd, photo, city ,status ,joinedAt} = req.body;
 
 const newPost = new provider({
-    name, emailid, pwd, photo, city,subcategoryid,specilization,status
+    name, emailId, pwd, photo, city, status, joinedAt
 });
 try{
     const savePost = await newPost.save();
