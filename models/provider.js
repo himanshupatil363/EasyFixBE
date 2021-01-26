@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const provider = new mongoose.Schema({
         name: { type:String, required: true },
         emailId: { type:String , required:true },
@@ -9,5 +8,4 @@ const provider = new mongoose.Schema({
         status : { type:String , default: 'inactive'},
         joinedAt : { type:Date, default: Date.now, required:false}
 });
-
 module.exports = mongoose.model("provider",provider);
