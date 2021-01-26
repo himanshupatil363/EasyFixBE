@@ -13,16 +13,16 @@ const complain = require("../models/complain");
 
 router.post("/register", async (req, res) => {
     try{
-    const { name, emailid, pwd, photo, city } = req.body;
+    const { name, emailId, pwd, photo, city, joinedAt} = req.body;
     
-    if(!emailid || !pwd){
+    if(!emailId || !pwd){
         return res.status(400).json({msg : "Not all fields have been altered."});
     }
     if(pwd.length<6){
         return res.status(400).json({msg: "The password should be more than 6 characters"});
     }
     
-    const existinguser = await user.findOne({emailid:emailid});
+    const existinguser = await user.findOne({emailId:emailId});
     if (existinguser)
         return res.status(400).json({msg : "An account with this email is already exist."});
 
@@ -33,7 +33,7 @@ router.post("/register", async (req, res) => {
     const hashedpwd = await bcrypt.hash(pwd,salt);
 
    // console.log(hashedpwd);
-    const newUser = new user({name, emailid, pwd : hashedpwd , photo, city});
+    const newUser = new user({name, emailId, pwd : hashedpwd , photo, city, joinedAt});
     const saveUser = await newUser.save();
     res.json(saveUser);
     //console.log(saveUser)
@@ -47,14 +47,14 @@ catch(err)
 
 router.post("/login", async(req,res) => {
     try{
-        const { emailid, pwd } = req.body;
+        const { emailId, pwd } = req.body;
 
-        if(!emailid || !pwd)
+        if(!emailId || !pwd)
         {
             return res.status(400).json({msg : "Not all fields have been altered."});
         }
 
-        const User= await user.findOne({ emailid : emailid});
+        const User= await user.findOne({ emailId : emailId});
         if(!User)
             return res.status(400).json({msg : "No account with this email has been registered."});
     
@@ -70,7 +70,7 @@ router.post("/login", async(req,res) => {
             User: {
                 id:User._id,
                 name:User.name,
-                emailid:User.emailid,
+                emailId:User.emailId,
             }
 
         });
@@ -163,10 +163,10 @@ router.post("/payment", async (req, res) => {
             }
             });
         router.post("/systemfeedback", async (req, res) => {
-                const { username,emailid,message } = req.body;
+                const { username,emailId,message } = req.body;
                 
                 const newUser = new systemfeedback({
-                    username,emailid,message
+                    username,emailId,message
                 });
                 try{
                     const saveUser = await newUser.save();
