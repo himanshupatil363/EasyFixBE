@@ -272,9 +272,9 @@ router.post("/complain", async (req, res) => {
         console.error(err);
     }
 });
-router.get("/",auth ,async(req,res) =>{
-    const user =await User.findById(req.user);
-    res.json(user);
+router.get("/",auth ,async (req,res) =>{
+    const currentUser = await user.findById(req.currentUser);
+    res.json(currentUser);
 });
 router.get("/all", async (req, res) => {
     try {
