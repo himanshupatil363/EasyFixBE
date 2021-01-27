@@ -6,7 +6,6 @@ const Package = require("../models/package");
 const offer = require("../models/offer");
 const step = require("../models/step");
 const paytoprovider = require("../models/paytoprovider");
-const city = require("../models/city");
 
 router.post("/register", async (req, res) => {
     const {
@@ -134,21 +133,6 @@ router.post("/paytoprovider", async (req, res) => {
         providerid,
         pdate,
         orderid
-    });
-    try {
-        const savePost = await newPost.save();
-        console.log(savePost)
-    } catch (err) {
-        console.error(err);
-    }
-});
-router.post("/city", async (req, res) => {
-    const {
-        cityname
-    } = req.body;
-
-    const newPost = new city({
-        cityname
     });
     try {
         const savePost = await newPost.save();
