@@ -5,7 +5,7 @@ const provider = new mongoose.Schema({
         pwd: { type:String, required:true },
         photo: { type:String, required:false},
         city: { type:String, required:false},
-        status : { type:String , default: 'inactive'},
+        status : { type:String , default: 'active'},
         joinedAt : { type:Date, default: Date.now, required:false}
 });
 module.exports = mongoose.model("provider",provider);
