@@ -274,7 +274,7 @@ router.post("/complain", async (req, res) => {
 router.get("/",auth ,async (req,res) =>{
     const currentUser = await user.findById(req.userd);
     res.json({
-        displayname:currentUser.name,
+        name:currentUser.name,
         id:currentUser._id
     });
 });
