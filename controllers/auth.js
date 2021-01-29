@@ -1,5 +1,7 @@
+const crypto = require('crypto');
 const User = require('../models/User');
 const ErrorResponse = require('../utlis/errorResponse');
+const sendEmail = require('../utlis/sendEmail');
 exports.register = async (req, res, next) => {
     const {
         username,
@@ -39,7 +41,7 @@ exports.login = async (req, res, next) => {
     }
 };
 
-exports.forgotpassword = (req, res, next) => {
+exports.forgotpassword = async (req, res, next) => {
     const {email} = req.body;
     try{
         const user = await User.findOne({email});
@@ -56,17 +58,45 @@ exports.forgotpassword = (req, res, next) => {
         `
 
         try {
-            
+            await sendEmail({
+                to: user.email,
+                subject: "Password Reset Request",
+                text: message
+            });
+            res.status(200).json({ success:true ,data:"Email Sent"})
         } catch (error) {
-            
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpire = undefined;
+            await user.save();
+            return next(new ErrorResponse("Email could not be sent",500))
         }
     }catch(error){
-
+        next(error);
     }
 };
 
-exports.resetpassword = (req, res, next) => {
-    res.send("resetpassword route");
+exports.resetpassword = async (req, res, next) => {
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+    try {
+        const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire:{ $gt:Date.now() }
+        })
+
+        if(!user){
+            return next(new ErrorResponse("Invalid Reset token",400))
+        }
+        user.password = req.body.password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save();
+        res.status(201).json({
+            success:true,
+            data:"Password Reset Success"
+        })
+    } catch (error) {
+        next(error)
+    }
 };
 
 const  sendToken = (user ,statusCode, res) => {

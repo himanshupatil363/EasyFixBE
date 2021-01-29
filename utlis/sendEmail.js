@@ -13,7 +13,7 @@ const sendEmail = (options) => {
         subject: options.subject,
         html: options.text
     }
-    transporter.sendMail(mailOptions,function(err.info){
+    transporter.sendMail(mailOptions,function(err, info){
         if(err){
             console.log(err)
         }
