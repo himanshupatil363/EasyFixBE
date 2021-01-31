@@ -53,7 +53,7 @@ exports.forgotpassword = async (req, res, next) => {
         const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
         const message = `
         <h1>You Have requested a password reset</h1>
-        <p>please go to this link ti reset your password</p>
+        <p>please go to this link to reset your password</p>
         <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
         `
 

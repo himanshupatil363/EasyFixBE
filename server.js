@@ -14,6 +14,7 @@ app.use(express.json());
 //setup routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
+app.use("/user",require("./routes/user"));
 //error handler
 app.use(errorHandler);
 
