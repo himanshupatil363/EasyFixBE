@@ -17,9 +17,6 @@ const sendEmail = (options) => {
         if(err){
             console.log(err)
         }
-        else{
-            console.log(info)
-        }
     });
 };
 module.exports = sendEmail;

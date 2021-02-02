@@ -12,9 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 //setup routes
+app.use("/api/pauth", require("./routes/provider"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use("/user",require("./routes/user"));
+app.use("/category",require("./routes/categoryroutes"));
+app.use("/service",require("./routes/serviceroutes"))
 //error handler
 app.use(errorHandler);
 
