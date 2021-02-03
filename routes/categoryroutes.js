@@ -27,4 +27,14 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/:id", async(req, res) => {
+    try {
+        const oneCategory = await Category.findById(req.params.id);
+        res.json(oneCategory)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;
