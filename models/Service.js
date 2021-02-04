@@ -12,10 +12,8 @@ const ServiceSchema = new mongoose.Schema({
         type: String,
     },
     category: {
-        name: {
-            type: String,
-            required: [true, "Please provide a name"]
-        },
+        type: String,
+        required: [true, "Please provide a name"]
       },
 });
 const Service = mongoose.model("Service", ServiceSchema);
