@@ -6,9 +6,6 @@ const ErrorResponse = require('../middleware/error');
 router.post("/add", async (req, res) => {
     try {
         const service = req.body;
-        if (!ObjectID.isValid(service.category)) {
-            return next(new ErrorResponse("Category isnt selected", 401))
-        }
         const newService = await Service.create(service);
         res.send(newService);
     } catch (err) {
