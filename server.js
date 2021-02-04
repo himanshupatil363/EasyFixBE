@@ -16,8 +16,10 @@ app.use("/api/pauth", require("./routes/provider"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 app.use("/user",require("./routes/user"));
+app.use("/admin",require("./routes/adminroute"));
 app.use("/category",require("./routes/categoryroutes"));
 app.use("/service",require("./routes/serviceroutes"));
+app.use("/service/:id",require("./routes/serviceroutes"));
 app.use("/order",require("./routes/orderroutes"));
 //error handler
 app.use(errorHandler);

@@ -21,4 +21,14 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/:id", async (req, res) => {
+    try {
+        const seeServiceid = await Service.findById(req.params.id);
+        res.json(seeServiceid)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;
