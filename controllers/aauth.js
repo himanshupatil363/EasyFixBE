@@ -36,10 +36,12 @@ exports.login = async (req, res, next) => {
         sendToken(admin, 200, res);
     }
     catch(error){
-        res.status(500).json({success:false, error:"Invalid Credential"})
+        res.status(500).json({success:false, error:"Invalid Credentials"})
     }
 };
-const  sendToken = (provider ,statusCode, res) => {
-    const token = provider.getSignedToken();
+
+
+const  sendToken = (admin ,statusCode, res) => {
+    const token = admin.getSignedToken();
     res.status(statusCode).json({success:true, token})
 }
