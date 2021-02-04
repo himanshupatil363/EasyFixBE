@@ -31,4 +31,14 @@ router.get("/:id", async (req, res) => {
         });
     }
 });
+router.get("/cat/:catname", async (req, res) => {
+    try {
+        const seeServicecat = await Service.find({category: req.params.catname});
+        res.json(seeServicecat)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;
