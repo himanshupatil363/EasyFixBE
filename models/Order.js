@@ -1,24 +1,33 @@
 const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, "Please specify user"],
+    username: {
+        type: String,
+        required: [true, "Please provide a user name"]
     },
-    provider: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Provider',
-        required: [true, "Please specify provider"],
+    providername: {
+        type: String,
+        required: [true, "Please provide a provider name"]
     },
     service: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service',
-        required: [true, "Please specify service"],
+        type: String,
+        required: [true, "Please provide a service name"]
     },
-    date: {
+    address: {
+        type: String,
+        required: [true, "Please provide a address"]
+    },
+    city: {
+        type: String,
+        required: [true, "Please provide a city"]
+    },
+    datetime: {
         type: Date,
-        default: Date.now
-    }
+        required: [true, "Please provide a date and time"]
+    },
+    status: {
+        type: String,
+        required: [true, "Please provide a status"]
+    },
 });
 const Order = mongoose.model("Order", OrderSchema);
 module.exports = Order;
