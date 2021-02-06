@@ -42,7 +42,7 @@ ProviderSchema.methods.matchPasswords = async function(password){
 }
 
 ProviderSchema.methods.getSignedToken = function(){
-    return jwt.sign({id:this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRE,});
+    return jwt.sign({id:this._id}, process.env.JWT_SECRET);
 };
 
 ProviderSchema.methods.getResetPasswordToken = function(){

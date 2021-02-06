@@ -16,10 +16,6 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a address"]
     },
-    city: {
-        type: String,
-        required: [true, "Please provide a city"]
-    },
     datetime: {
         type: Date,
         required: [true, "Please provide a date and time"]
