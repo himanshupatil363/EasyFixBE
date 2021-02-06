@@ -15,6 +15,7 @@ app.use(express.json());
 app.use("/api/pauth", require("./routes/provider"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
+app.use("/provider/api/private", require("./routes/pprivate"));
 app.use("/user",require("./routes/user"));
 app.use("/admin",require("./routes/adminroute"));
 app.use("/category",require("./routes/categoryroutes"));
