@@ -22,4 +22,14 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/:id", async(req, res) => {
+    try {
+        const oneProvider = await Provider.findById(req.params.id);
+        res.json(oneProvider)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;
