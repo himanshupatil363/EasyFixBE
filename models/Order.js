@@ -31,6 +31,10 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         default:"pending"
     },
+    price:{
+        type: Number,
+        required: [true, "Please enter the price"],
+    },
     orderdAt:{
         type: Date,
         default:Date.now

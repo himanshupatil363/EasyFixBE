@@ -5,6 +5,7 @@ const Provider = require('../models/Provider');
 const User = require('../models/User');
 const ErrorResponse = require('../middleware/error');
 const jwt = require('jsonwebtoken');
+const { response } = require('express');
 
 router.post("/add", async (req, res) => {
     try {
@@ -25,11 +26,11 @@ router.get("/userinfo/:tok", async(req,res)=>{
         console.log(err)
     }
 });
-router.get("/providerinfo/:token", async(req,res)=>{
+router.get("/pvinfo/:token", async(req,res)=>{
     try {
         let authProv = await jwt.verify(req.params.token, process.env.JWT_SECRET)
-        const info = await Provider.findById(authProv.id);
-        res.json(info);
+        let service = await Service.find( { provider: [authProv.id]})
+        res.json(service)
     } catch (err) {
         console.log(err)
     }
