@@ -17,11 +17,20 @@ router.post("/add", async (req, res) => {
     }
 });
 
-router.get("/userinfo/:tok", async(req,res)=>{
+router.get("/userinfo/:token", async(req,res)=>{
     try {
-        let authUser = await jwt.verify(req.params.tok, process.env.JWT_SECRET)
+        let authUser = await jwt.verify(req.params.token, process.env.JWT_SECRET)
         const uinfo = await User.findById(authUser.id);
         res.json(uinfo);
+    } catch (err) {
+        console.log(err)
+    }
+});
+router.get("/providerinfo/:token", async(req,res)=>{
+    try {
+        let authProvider = await jwt.verify(req.params.token, process.env.JWT_SECRET)
+        const pinfo = await Provider.findById(authProvider.id);
+        res.json(pinfo);
     } catch (err) {
         console.log(err)
     }
