@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
+const Provider = require('../models/Provider')
+const User = require('../models/User')
 const jwt = require('jsonwebtoken');
 router.post("/add", async (req, res) => {
     try {
@@ -20,6 +22,7 @@ router.get("/prov/:token", async (req, res) => {
         console.log(err)
     }
 });
+
 router.get("/all", async (req, res) => {
     try {
         const seeOrder = await Order.find();
