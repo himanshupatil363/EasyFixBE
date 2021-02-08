@@ -19,6 +19,7 @@ app.use("/api/private", require("./routes/private"));
 app.use("/provider/api/private", require("./routes/pprivate"));
 app.use("/user",require("./routes/user"));
 app.use("/admin",require("./routes/adminroute"));
+app.use("/feedback",require("./routes/feedbackroute"));
 app.use("/category",require("./routes/categoryroutes"));
 app.use("/service",require("./routes/serviceroutes"));
 app.use("/service/:id",require("./routes/serviceroutes"));
