@@ -29,7 +29,7 @@ router.get("/all", async (req, res) => {
 });
 router.get("/count", async (req, res) => {
     try {
-        const countcategory = await Category.find().count();
+        const countcategory = await Category.find().countDocuments();
         res.json(countcategory)
     } catch (err) {
         res.json({

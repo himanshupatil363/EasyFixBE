@@ -52,7 +52,7 @@ router.put("/updateorder/:id", async (req, res) => {
 });
 router.get("/count", async (req, res) => {
     try {
-        const countorder = await Order.find().count();
+        const countorder = await Order.find().countDocuments();
         res.json(countorder)
     } catch (err) {
         res.json({

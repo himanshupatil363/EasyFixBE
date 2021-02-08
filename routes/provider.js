@@ -24,7 +24,7 @@ router.get("/all", async (req, res) => {
 });
 router.get("/count", async (req, res) => {
     try {
-        const countprovider = await Provider.find().count();
+        const countprovider = await Provider.find().countDocuments();
         res.json(countprovider)
     } catch (err) {
         res.json({

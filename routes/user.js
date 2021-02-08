@@ -17,7 +17,7 @@ router.get("/all", async (req, res) => {
 });
 router.get("/count", async (req, res) => {
     try {
-        const countuser = await User.find().count();
+        const countuser = await User.find().countDocuments();
         res.json(countuser)
     } catch (err) {
         res.json({

@@ -56,7 +56,7 @@ router.get("/all", async (req, res) => {
 });
 router.get("/count", async (req, res) => {
     try {
-        const countservice = await Service.find().count();
+        const countservice = await Service.find().countDocuments();
         res.json(countservice)
     } catch (err) {
         res.json({
