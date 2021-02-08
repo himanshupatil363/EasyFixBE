@@ -17,6 +17,10 @@ const FeedbackSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a feedback"]
     },
+    submittedat: {
+        type: Date,
+        default:Date.now
+    },
 });
 const Feedback = mongoose.model("Feedback", FeedbackSchema);
 module.exports = Feedback;

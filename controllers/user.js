@@ -3,13 +3,15 @@ exports.feedback = async (req, res, next) => {
     const {
         name,
         email,
-        msg
+        msg,
+        submittedat
     } = req.body;
     try {
         const feedback = await Feedback.create({
             name,
             email,
-            msg
+            msg,
+            submittedat
         });
         sendToken(feedback, 201, res);
     } catch (error) {
