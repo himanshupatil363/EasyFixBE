@@ -27,6 +27,16 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/count", async (req, res) => {
+    try {
+        const countcategory = await Category.find().count();
+        res.json(countcategory)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/:id", async(req, res) => {
     try {
         const oneCategory = await Category.findById(req.params.id);

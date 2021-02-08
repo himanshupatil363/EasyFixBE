@@ -54,6 +54,16 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/count", async (req, res) => {
+    try {
+        const countservice = await Service.find().count();
+        res.json(countservice)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/:id", async (req, res) => {
     try {
         const seeServiceid = await Service.findById(req.params.id);

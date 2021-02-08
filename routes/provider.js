@@ -22,6 +22,16 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/count", async (req, res) => {
+    try {
+        const countprovider = await Provider.find().count();
+        res.json(countprovider)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/:id", async(req, res) => {
     try {
         const oneProvider = await Provider.findById(req.params.id);

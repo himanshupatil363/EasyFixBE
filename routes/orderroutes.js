@@ -33,4 +33,31 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.put("/updateorder/:id", async (req, res) => {
+    try {
+        Order.findByIdAndUpdate(req.params.id, { status: 'Deliverd' }, 
+                            function (err, docs) { 
+    if (err){ 
+        console.log(err) 
+    } 
+    else{ 
+        console.log("Updated User : ", docs); 
+    } 
+}); 
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
+router.get("/count", async (req, res) => {
+    try {
+        const countorder = await Order.find().count();
+        res.json(countorder)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;

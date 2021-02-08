@@ -15,4 +15,14 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/count", async (req, res) => {
+    try {
+        const countuser = await User.find().count();
+        res.json(countuser)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;
