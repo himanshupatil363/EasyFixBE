@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/Category');
+const Service = require('../models/Service');
 router.post("/add", async (req, res) => {
     const {
         name,
@@ -25,6 +26,14 @@ router.get("/all", async (req, res) => {
         res.json({
             message: err
         });
+    }
+});
+router.get("/counting/:id", async (req, res) => {
+    try {
+        const seeCategory = await Service.find({category : req.params.id}).countDocuments();
+        res.json(seeCategory)
+    } catch (err) {
+        console.log(err)
     }
 });
 router.get("/count", async (req, res) => {
