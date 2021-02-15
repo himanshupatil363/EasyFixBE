@@ -76,7 +76,7 @@ router.get("/:id", async (req, res) => {
 });
 router.get("/cat/:catname", async (req, res) => {
     try {
-        const seeServicecat = await Service.find({category: req.params.catname});
+        const seeServicecat = await Service.find({category: req.params.catname}).sort( { "price": 0 } );
         res.json(seeServicecat)
     } catch (err) {
         res.json({
@@ -87,13 +87,13 @@ router.get("/cat/:catname", async (req, res) => {
 router.put("/updateservice/:id", async (req, res) => {
     try {
         const service = req.body;
-        Service.findByIdAndUpdate(req.params.id, { service }, 
+        Service.findByIdAndUpdate(req.params.id, { $set:service }, 
                             function (err, docs) { 
     if (err){ 
         console.log(err) 
     } 
     else{ 
-        console.log("Updated User : ", docs); 
+        console.log("Updated service : ", docs); 
     } 
 }); 
     } catch (err) {
