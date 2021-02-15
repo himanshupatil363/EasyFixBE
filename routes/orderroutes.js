@@ -23,6 +23,15 @@ router.get("/prov/:token", async (req, res) => {
     }
 });
 
+router.get("/user/:token", async (req, res) => {
+    try {
+        let authuser = await jwt.verify(req.params.token, process.env.JWT_SECRET)
+        let order = await Order.find( { user: [authuser.id]})
+        res.json(order)
+    } catch (err) {
+        console.log(err)
+    }
+});
 router.get("/all", async (req, res) => {
     try {
         const seeOrder = await Order.find();
