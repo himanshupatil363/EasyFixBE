@@ -44,7 +44,7 @@ router.get("/all", async (req, res) => {
 });
 router.put("/updateorder/:id", async (req, res) => {
     try {
-        Order.findByIdAndUpdate(req.params.id, { status: 'Deliverd' }, 
+        Order.findByIdAndUpdate(req.params.id, { status: 'Delivered' }, 
                             function (err, docs) { 
     if (err){ 
         console.log(err) 
