@@ -84,4 +84,22 @@ router.get("/cat/:catname", async (req, res) => {
         });
     }
 });
+router.put("/updateservice/:id", async (req, res) => {
+    try {
+        const service = req.body;
+        Service.findByIdAndUpdate(req.params.id, { service }, 
+                            function (err, docs) { 
+    if (err){ 
+        console.log(err) 
+    } 
+    else{ 
+        console.log("Updated User : ", docs); 
+    } 
+}); 
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;

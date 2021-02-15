@@ -36,6 +36,14 @@ router.get("/counting/:id", async (req, res) => {
         console.log(err)
     }
 });
+router.get("/counting", async (req, res) => {
+    try {
+        const seeCategory = await Category.find({},{name:1,_id:0});
+        res.json(seeCategory)
+    } catch (err) {
+        console.log(err)
+    }
+});
 router.get("/count", async (req, res) => {
     try {
         const countcategory = await Category.find().countDocuments();
