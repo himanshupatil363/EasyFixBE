@@ -84,6 +84,16 @@ router.get("/cat/:catname", async (req, res) => {
         });
     }
 });
+router.get("/editservice/edit/:id", async (req, res) => {
+    try {
+        const getservice = await Service.findById(req.params.id);
+        res.json(getservice)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.put("/updateservice/:id", async (req, res) => {
     try {
         const service = req.body;
