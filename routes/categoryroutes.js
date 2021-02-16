@@ -64,4 +64,14 @@ router.get("/:id", async(req, res) => {
         });
     }
 });
+router.post("/deletecategory/:id", async (req, res) => {
+    try {
+        const deletecategoryid = await Category.findByIdAndDelete(req.params.id);
+        res.json(deletecategoryid)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 module.exports = router;

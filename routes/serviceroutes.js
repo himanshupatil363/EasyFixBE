@@ -74,6 +74,16 @@ router.get("/:id", async (req, res) => {
         });
     }
 });
+router.post("/deleteservice/:id", async (req, res) => {
+    try {
+        const deleteServiceid = await Service.findByIdAndDelete(req.params.id);
+        res.json(deleteServiceid)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/cat/:catname", async (req, res) => {
     try {
         const seeServicecat = await Service.find({category: req.params.catname}).sort( { "price": 0 } );
