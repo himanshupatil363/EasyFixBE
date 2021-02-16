@@ -32,6 +32,16 @@ router.get("/user/:token", async (req, res) => {
         console.log(err)
     }
 });
+router.get("/reportorder", async (req, res) => {
+    try {
+        const seeOrderreport = await Order.find({},{custname: 1,service:1,address: 1, status:1,orderdat:1});
+        res.json(seeOrderreport)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/all", async (req, res) => {
     try {
         const seeOrder = await Order.find();
