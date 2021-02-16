@@ -54,6 +54,16 @@ router.get("/all", async (req, res) => {
         });
     }
 });
+router.get("/reportservice", async (req, res) => {
+    try {
+        const reportserviceid = await Service.find({},{name: 1, category: 1,price:1});
+        res.json(reportserviceid)
+    } catch (err) {
+        res.json({
+            message: err
+        });
+    }
+});
 router.get("/count", async (req, res) => {
     try {
         const countservice = await Service.find().countDocuments();
