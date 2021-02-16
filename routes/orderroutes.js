@@ -34,7 +34,7 @@ router.get("/user/:token", async (req, res) => {
 });
 router.get("/reportorder", async (req, res) => {
     try {
-        const seeOrderreport = await Order.find({},{custname: 1,service:1,address: 1, status:1,orderdat:1});
+        const seeOrderreport = await Order.find({},{custname: 1,service:1,address: 1, status:1,orderdAt:1});
         res.json(seeOrderreport)
     } catch (err) {
         res.json({
